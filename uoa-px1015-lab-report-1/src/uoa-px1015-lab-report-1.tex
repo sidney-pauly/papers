@@ -12,10 +12,10 @@
 \usepackage{float}
 \usepackage{csvsimple}
 \usepackage{hyperref}
-% \usepackage{biblatex} %Imports biblatex package
+\usepackage{biblatex} %Imports biblatex package
 
 % Bibliography
-% \addbibresource{all.bib}
+\addbibresource{all.bib}
 
 % \include{data/reaction-time.csv}
  
@@ -224,7 +224,7 @@ Next the oscilloscope was brought out to take a closer look at the output of the
 was wired up as illustrated in the manual:
 \begin{figure}[h]
 \includegraphics[width=16cm]{images/Oscilloscope.png}
-\caption{Function Generator wired up to Oscilloscope}
+\caption{Function Generator wired up to Oscilloscope \cite{ross}}
 \label{fig:figure1}
 \end{figure}
 
@@ -420,7 +420,7 @@ standard deviation is in the 100 millisecond domain.\\
 \\
 Keeping this in mind there are again some interesting observations to be made. First the reaction time of 20
 year old test subjects seams to lie in the 200-220 millisecond range. This is close to the value stated in
-online resources. Also noteworthy is the high standard deviation. It shows that human reaction time is not
+online resources \cite{wiki} . Also noteworthy is the high standard deviation. It shows that human reaction time is not
 consistent. This might have different reasons, one of them could be if the subject focuses on the LED
 or is distracted. Another factor could be the waiting time until the LED lights up. It could happen that the
 subject involuntarily loses interest after a while. It would definitely be insightful to repeat the experiment
@@ -508,11 +508,6 @@ highest achievable time-resolution within the experiment was 0.1ms (10kHz), whil
 that was achieved by a human lay only at around 33ms (30Hz). As noted it might even be possible to improve
 this with better electronics and by conducting more runs.
 
-% \printbibliography
-
-\section{References}
-[1] MacPherson, Ross Franklin, First Year Physics Lab Manual (2009), University of Aberdeen.
-\newline
-[2] Wikipedia, \url{https://en.wikipedia.org/wiki/Mental_chronometry}, Mental Chronometry, 03.12.2021
+\printbibliography
 
 \end{document}
