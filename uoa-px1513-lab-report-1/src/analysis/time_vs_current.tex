@@ -1,0 +1,54 @@
+% This file was created with tikzplotlib v0.10.1.
+\begin{tikzpicture}
+
+\definecolor{darkgray176}{RGB}{176,176,176}
+\definecolor{darkorange25512714}{RGB}{255,127,14}
+\definecolor{lightgray204}{RGB}{204,204,204}
+\definecolor{steelblue31119180}{RGB}{31,119,180}
+
+\begin{axis}[
+legend cell align={left},
+legend style={
+  fill opacity=0.8,
+  draw opacity=1,
+  text opacity=1,
+  at={(0.03,0.97)},
+  anchor=north west,
+  draw=lightgray204
+},
+tick align=outside,
+tick pos=left,
+title={Current vs. Frequency},
+x grid style={darkgray176},
+xlabel={Current (i) in A},
+xmajorgrids,
+xmin=0, xmax=2.5,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={frequency (T\^-2)},
+ymajorgrids,
+ymin=0, ymax=50,
+ytick style={color=black}
+]
+\addplot [semithick, steelblue31119180, mark=x, mark size=3, mark options={solid}, only marks]
+table {%
+2 38.7711709979234
+1.8 35.0957974888255
+1.6 31.1403858418367
+1.4 27.8766158680388
+1.2 23.888492339916
+1 19.788249895518
+0.8 15.5981322172558
+0.6 12.1574279939855
+0.4 8.5696735022953
+0.2 3.82664619257888
+};
+\addlegendentry{time/current}
+\addplot [semithick, darkorange25512714, dashed, forget plot]
+table {%
+0 0.470123440823551
+2.5 48.654522970355
+};
+\end{axis}
+
+\end{tikzpicture}
