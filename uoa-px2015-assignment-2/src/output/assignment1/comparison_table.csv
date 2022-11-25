@@ -1,0 +1,6 @@
+Initial angle (rad),Period (numerical solution),Period (analytical solution),Error
+0.20,2.85,2.84,0.01
+1.00,3.03,2.84,0.19
+2.00,3.77,2.84,0.93
+3.00,7.30,2.84,4.46
+3.14,15.40,2.84,12.56
