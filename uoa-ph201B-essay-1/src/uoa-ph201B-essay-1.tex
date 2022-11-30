@@ -1,0 +1,170 @@
+\documentclass[14pt]{article}
+
+\usepackage[letterpaper,margin=0.75in]{geometry}
+
+% \usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{fancyhdr}
+\usepackage{standalone}
+\usepackage{float}
+\usepackage{hyperref}
+% \usepackage{biblatex} %Imports biblatex package
+\usepackage{amssymb} % For item list in premise conclusion style
+
+% Bibliography
+\usepackage{csquotes}
+\usepackage[style=mla]{biblatex}
+\addbibresource{all.bib}
+
+% \include{data/reaction-time.csv}
+
+\setlength{\parindent}{1.4em}
+
+\pagestyle{fancy}
+
+\begin{document}
+
+
+\title{Critical response A.J. Ayer's essay "Freedom and Necessity"}
+\date{}
+
+\input{../../common/common-meta-info.tex}
+
+
+\fancyhf{}
+\fancyhead[L]{Name: \theauthor}
+% \fancyhead[C]{}
+\fancyhead[R]{ID: \theuoastudentid}
+
+
+% \maketitle
+
+\begin{titlepage}
+  \begin{center}
+    \Large
+    \textbf{\thetitle}
+        
+    \vspace{0.4cm}
+    \large
+    PH201B - Essay 1
+        
+    \vspace{0.4cm}
+    \textbf{\theauthor}\\
+    \textbf{\theuoastudentid}
+
+    \vspace{2cm}
+    \textbf{Abstract}
+
+  \end{center}
+
+  In his essay “Freedom and Necessity” A. J. Ayer argues for his compatibilist view.
+  Furthermore he makes some remarks as to why indeterminism (true randomness) is not a solution either
+  as it would undermine moral responsibility. This essay will focus on summarizing Ayer's compatibilist argument itself,
+  and explain where it falls short.
+
+  \vfill
+
+  \begin{center}
+
+    University of Aberdeen\\
+    Scotland\\
+    UK\\
+    \thedate
+    \vspace{0.4cm}
+    \url{https://github.com/sidney-pauly/papers}
+  \end{center}
+\end{titlepage}
+
+
+To understand Ayers argument it makes sense to briefly revisit the core argument as to why free will and determinism are incompatible:
+
+\begin{itemize}
+  \item[1.] Determinism means that all future world states are determined only be the current state of the world and causal laws.
+  \item[2.] To have free will means to be able act otherwise.
+  \item[3.] If the future and therefore all actions are already determined than there is no way to act otherwise.
+  \item[$\therefore$] Therefore determinism and free will are incompatible.
+\end{itemize}
+
+Ayer takes issue with premise 2. of the argument layed out above and what it implies for premise
+3. He argues that we should understand what free will means by looking at it's ordinary usage.
+In ordinary language someone is assumed to not act freely if their action is constraint.
+Ayer gives multiple examples for various types of constraints.
+They could be external to the person, like someone pointing a gun threatening to kill them unless they perform
+some action. They could also be internal like having a certain mental condition preventing someone to act
+based on their own choices and rather being forced to perform certain things (e.g. kleptomania, where a person
+cannot prevent themselves stealing things, regardless of how much they want to).
+By contrast acting under free will thereby means to act without any constraint. By extension
+Ayer essentially argues that having the ability to do otherwise should be understood as not being constraint
+to act a certain way.\\
+\\
+The obvious objection, which Ayer himself acknowledges,
+is that determinism could be considered as such a constraint.
+In his own words: “I do not have the feeling of constraint I have when a pistol
+is manifestly pointed at my head; but the chains of causation by which I am bound are no less
+effective for being invisible”\autocite[145]{Ayer}.
+Ayer counters by arguing that we need to qualify what to consider as constraints.
+Again drawing from ordinary usage, an action is only regarded
+as not free if it has specific causes, specifically ones that constrain the action.
+Just because someone says they ate because they where hungry we don't see their
+decision on wether they should have a meal as being constraint.
+Ayer argues that as causes that explain what happened but do not constrain the resulting action.
+Ayer further describes Determinism under this model as only requiring causes to be sufficient or necessary.
+I.e. they are only required to offer some causal explanation for what happened.\\
+\\
+So what is the problem with Ayers compatibilist approach?
+While most of his argument seems to be sound and not build
+on further assumption, he brings in a new account of
+determinism which he poorly justifies. In essence the problem
+is that determinism does not (in the way it is ordinarily understood),
+mean that events have sufficient \textbf{or} necessary causes rather it means that events have both sufficient
+\textbf{and} necessary causes. Indeed R. C. Perry comes to the very same 
+conclusion in his discussion piece on Ayer's essay:
+“And accepting this law [the law of universal causation], it was not [...]
+A as a necessary or sufficient condition of B, but rather A as both a
+necessary and sufficient condition for B”\autocite[229]{Perry}.
+In his article Perry goes on to explain how Ayer is indeed holding
+this exact account of determinism while also holding a contrary one where
+causes could be either necessary or sufficient. He shows that Ayers argument
+does not hold up as he does not offer a way to reconcile them. \\
+\\
+Regardless of the essays further problems, to dismiss Ayer's compatibilist
+argument it is sufficient
+to show how it is inconsistent within itself and how said “or” premise
+does not hold with the way Ayer implies determinism to work.
+\\
+This indeed follows directly from premise 1. stated in the introductory argument defining
+determinism\footnote{Ayer himself seems to imply this view on determinism when he talks about
+"human behavior [...] entirely governed by causal laws"\autocite[139]{Ayer}}.
+For an event to be determined means that said event will happen just by
+virtue of the current world state and the causal laws. This
+means the previous world state is both a sufficient and necessary
+cause for the event to happen, which is best illustrated through an example.\\
+Suppose there is a sufficiently large and sturdy object traveling at a high
+velocity towards a pain of glass. By the laws of nature we know that
+the glass will break at a future point t when the objects impacts.
+Therefore the effect (the glass breaking) can be considered
+determined. From such a setup it easily follows why the initial world state is a
+sufficient cause for the effect to happen: there is nothing else needed for
+the glass to break other than the ball being on a collision trajectory.\\
+Now why is the initial world state also a necessary cause for the glass to break?
+Surely another object, also on a collision trajectory could have equally caused the glass to break.
+This may very well be true for the very abstract effect of “the glass breaking”,
+it does not hold however for the effect being the entire resulting world state.
+If we account for every last shard of glass, the exact sound waves being emitted from
+the collision as well as where the colliding object ended up,
+then we have to conclude that there could have only been one previous state the world could have been,
+to produce such an outcome (effect). Quoting Perry: “With [traditional determinism] the world [is] a vast machine,
+with no loose parts”\autocite[229]{Perry}.
+This becomes clearer when comparing one cause lets say it was a green ball breaking the glass to another one
+where a red ball was the cause. In the case where the red ball hit the class one would need to ask:
+If it was this ball that hit the glass where did the green ball end up in this instance?
+As in the common notion of determinism no objects are created nor destroyed one must answer:
+Somewhere else! Thereby making the second
+situation a completely different effect as the green ball is at a different place.\\
+\\
+Because of this way determinism is traditionally understood, Ayers distinction between causes that constrain and
+ones that don't no longer holds up, thereby rendering the argument ineffective.
+
+\printbibliography
+
+\end{document}
