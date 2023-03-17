@@ -1,0 +1,330 @@
+\documentclass[14pt]{article}
+
+\usepackage[letterpaper,margin=0.75in]{geometry}
+
+\usepackage[outputdir=../dist]{minted}
+
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{standalone}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage[style=mla]{biblatex} %Imports biblatex package
+
+% Bibliography
+\addbibresource{all.bib}
+
+% \include{data/reaction-time.csv}
+ 
+% \pgfplotsset{compat = newest}
+
+\setlength{\parindent}{0pt}
+
+\pagestyle{fancy}
+
+\begin{document}
+
+\lstset{
+  language=Python,
+  basicstyle=\small,          % print whole listing small
+  keywordstyle=\bfseries,
+  identifierstyle=,           % nothing happens
+  commentstyle=,              % white comments
+  stringstyle=\ttfamily,      % typewriter type for strings
+  showstringspaces=false,     % no special string spaces
+  numbers=left,
+  numberstyle=\tiny,
+  numbersep=5pt,
+  frame=tb,
+}
+
+\title{PX2505 - Electronics Lab Report - Haunted Doll Factory }
+\date{}
+\def\theinstructor{}
+
+\input{../../common/common-meta-info.tex}
+
+
+\fancyhf{}
+\fancyhead[L]{Name: \theauthor}
+% \fancyhead[C]{}
+\fancyhead[R]{ID: \theuoastudentid}
+
+
+% \maketitle
+
+\begin{titlepage}
+  \begin{center}
+    \Large
+    \textbf{\thetitle}
+        
+    \vspace{0.4cm}
+    \large
+    \thetitle
+        
+    \vspace{0.4cm}
+    \textbf{\theauthor}\\
+    \textbf{\theuoastudentid}
+
+       
+    \vspace{0.9cm}
+    \textbf{Declaration}\\
+    I certify that this report has been written by myself, except where otherwise
+    indicated
+  \end{center}
+
+  \vfill
+
+  \begin{center}
+
+    University of Aberdeen\\
+    Scotland\\
+    UK\\
+    \thedate
+    \vspace{0.4cm}
+    \url{https://github.com/sidney-pauly/papers}
+  \end{center}
+\end{titlepage}
+
+\tableofcontents
+
+\section{Introduction}
+
+The electronics section is on digital logic or TTL (Transistor-transistor logic). Broadly speaking the aim digital logic is to perform logic
+operations to perform various practical tasks. The most simple case is to directly evaluate logical conditions electronically. An example for this could
+be a trafic light assembly: The light for the pedestrians should only be set to green if the request button is pressed and no car is currently
+on the intersection, but not if it was already green in the last 30s. Those conditions can be translated into formal logic and further into
+a digital circuit which then performs these operations. In principle digital logic circuits can execute any higher order algorithms, which is what computers do,
+However this experiment only focuses on simple logic like in the example.\\
+\\
+The "Haunted Doll Factory" is exactly about such a application of basic logic. The doll has four inputs and four outputs and the task is to 
+have the motors (outputs) only turn on when specific inputs are active. Using simple logic gates (AND, OR, XOR, etc.) these requirements can be implemented
+both as an actual circuit as well a simulation one (within the Multisim simulation tool)\\
+\\
+A further practical goal when building digital circuits is to perform the task with as little components as possible. This is because fever components
+reduce the amount of failure points as well as the energy consumption of the device. To reduce the amount of components while still achieving the
+same logical behavior analytical methods can be used. Boolean algebra is a mathematical description of logic and can therefore be used
+to manipulate logical statements and to reduce them to their simplest form. This technique was used in this experiment to greatly reduce the 
+number of required logic gates.
+
+\section{Experiment}
+
+\subsection{Aim}
+The Lab Manual sets out the following scenario: We are tasked with designing an electronic board, that controls the behavior of (haunted) doll.
+The doll has four inputs (those could be buttons or switches) and four outputs (motors that can either be turned on or off). The desired logical
+behavior of how these inputs and outputs are related is given by (Table \ref{table:desired-behaviour}):
+
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{llll|llll}
+  \multicolumn{4}{l}{INPUT} & \multicolumn{4}{l}{OUTPUT} \\
+  $S_1$ & $S_2$ & $S_3$ & $S_4$ & $M_1$ & $M_2$ & $M_3$ & $M_4$ \\
+  \hline
+  0    & 0    & 0    & 0    & 0     & 0    & 0    & 0    \\
+  0    & 0    & 0    & 1    & 0     & 0    & 0    & 1    \\
+  0    & 0    & 1    & 0    & 0     & 0    & 1    & 0    \\
+  0    & 0    & 1    & 1    & 0     & 0    & 0    & 0    \\
+  0    & 1    & 0    & 0    & 0     & 0    & 0    & 0    \\
+  0    & 1    & 0    & 1    & 0     & 0    & 0    & 0    \\
+  0    & 1    & 1    & 0    & 0     & 0    & 0    & 0    \\
+  0    & 1    & 1    & 1    & 0     & 0    & 0    & 0    \\
+  1    & 0    & 0    & 0    & 1     & 0    & 0    & 0    \\
+  1    & 0    & 0    & 1    & 1     & 0    & 0    & 1    \\
+  1    & 0    & 1    & 0    & 1     & 0    & 1    & 0    \\
+  1    & 0    & 1    & 1    & 0     & 0    & 0    & 0    \\
+  1    & 1    & 0    & 0    & 1     & 1    & 0    & 0    \\
+  1    & 1    & 0    & 1    & 0     & 0    & 0    & 0    \\
+  1    & 1    & 1    & 0    & 1     & 1    & 1    & 0    \\
+  1    & 1    & 1    & 1    & 0     & 0    & 0    & 0   
+  \end{tabular}
+  \caption{\label{table:desired-behaviour} Desired Behavior of the Doll \autocite[Page 22]{ross}}
+\end{table}
+
+$S_{1-4}$ specify the four inputs, while $M_{1-4}$ specify the four outputs (motors). If a given input shows 0 its off, if it shows 1 its on, the same applies
+to the motors.
+
+\subsection{Theory}
+At first glance the behavior of the doll looks quite complex. It is not immediately clear what sort of simple logical expression could describe
+the behavior of the doll in its entirety. Luckily there are tools to analyses such a table and thus arrive at a simplified expression.\\
+
+The first thing that could be asked is for what inputs is an individual motor turned on? This could than be translated into logical language
+and those logical expression could then be reduced. A simple example is Motor 2, it is on if input 1 is on, input 2 is on, input 3 is off and input 4 is off.
+Alternatively it is also on if input 1 is on, input 2 is on, input 3 is on and input 4 is off. For all other cases the motor is off. This can also
+be represented in boolean algebra:
+$$
+M_2 = (S_1*S_2*\bar{S_3}*\bar{S_4}) + (S_1*S_2*S_3*\bar{S_4})
+$$
+Translated to natural language multiplication means "and", addition "or" and a bar over the respective value means "not". The nice thing about this
+representation is that relevant algebraic rules hold, i.e. transitivity, commutativity, etc.\autocite[Page 15]{ross}.\\
+
+Thus the above expression can be simplified to:
+$$
+M_2 = (S_1*S_2*\bar{S_4})(S_3+\bar{S_3})
+$$
+
+as something OR not something ($ X + \bar{X} $) is always true the expression further simplifies to:
+
+$$
+M_2 = S_1*S_2*\bar{S_4}
+$$
+
+Through the same technique similar expressions for the other motors could be derived. Then the expressions could be compared and
+similar operations could then be implemented with the same physical components to reduce their overall count.\\
+
+However in case of the doll there is a quicker and more effective way: converting the binary input and output signals to decimal. 
+As we are more used to decimal (and because decimal represents more information in fever digits) it is sometimes more intuitive to understand 
+and to infer patterns. Table \ref{table:decimal} shows such a decimal translation. The representation
+treats every input as a digit of a four digit binary number. The same is done for the output.
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{lll}
+  Input                       & Active Motor        & Output \\ 
+  \hline
+  0                           &                     & 0      \\
+  1                           & $M_4$               & 1      \\
+  2                           & $M_3$               & 2      \\
+  3                           &                     & 0      \\
+  4                           &                     & 0      \\
+  5                           &                     & 0      \\
+  6                           &                     & 0      \\
+  7                           &                     & 0      \\
+  8                           & $M_1$               & 8      \\
+  9                           & $M_1$, $M_4$        & 9      \\
+  10                          & $M_1$, $M_3$        & 10     \\
+  11                          &                     & 0      \\
+  12                          & $M_1$, $M_2$        & 12     \\
+  13                          &                     & 0      \\
+  14                          & $M_1$, $M_2$, $M_3$ & 14     \\
+  15                          &                     & 0     
+  \end{tabular}
+  \caption{\label{table:decimal} The behavior translated to Decimal}
+\end{table}
+
+Doing this translation immediately makes it obvious that there are just two cases:
+\begin{enumerate}
+  \item The output is 0 (all motors are off)
+  \item The input is the same as the output (the motors belonging to the respective input are on) 
+\end{enumerate}
+
+The result of this realization is that the task can be rephrased: we need a circuit that is only on for the binary representations of the
+numbers 1, 2, 8, 9, 10, 12 and 14. The most direct (but also most inflated) boolean representation for the same looks like this:
+
+$$
+O = (\bar{S_1}\bar{S_2}\bar{S_3}S_4)+(\bar{S_1}\bar{S_2}S_3\bar{S_4})+(\bar{S_1}\bar{S_2}S_3\bar{S_4})+(S_1\bar{S_2}S_3S_4)+(S_1\bar{S_2}S_3\bar{S_4})+(S_1S_2\bar{S_3}\bar{S_4})+(S_1S_2S_3\bar{S_4})
+$$
+
+Through a lot of algebraic manipulation one can end up with the following expression:
+
+$$
+O = S_1\bar{S_4} + \bar{S_2}S_3\bar{S_4}+\bar{S_2}\bar{S_3}S_4
+$$
+
+This expression can be further simplified by using the fact that $X\bar{Y}+\bar{X}Y = X \oplus Y$, i.e. X and not Y or not X and Y is the same
+as only X or only Y (exclusive OR):
+
+\begin{equation}
+O = S_1\bar{S_4} + \bar{S_2}(S_3 \oplus S_4)
+\label{eq:logic_filter}
+\end{equation}
+
+This simple expression now distinguishes the two cases laid out previously. If the expression is false, no motors should be on. If it is true
+the motors with that have their corresponding input on should be on as well. Logically this can be expressed as 
+$$
+M_n = S_nO
+$$
+
+Note that this expression basically acts as a filter or mask on
+the inputs. Because of this the expression will from on be referred to as the logic filter.
+
+
+\clearpage
+\subsection{Verifying the theory}
+
+Before spending a lot of time on building circuits it useful to know that the discoverd logic expression does indeed recover the desired logical behavior.
+The following script runs through all different input combinations and applies the logical expression to them. The result is then printed out.
+
+\begin{minted}[linenos]{python}
+
+import pandas as pd
+
+result = [0] * 16
+
+for i in range(0, 16):
+
+    s_1 = (8 & i) > 0
+    s_2 = (4 & i) > 0
+    s_3 = (2 & i) > 0
+    s_4 = (1 & i) > 0
+    
+    O = (s_1 and not s_4) or (not s_2 and (s_3 ^ s_4))
+
+    result[i] = [s_1, s_2, s_3, s_4, O and s_1, O and s_2, O and s_3, O and s_4]
+
+print(pd.DataFrame(result))
+
+\end{minted}
+
+The output of this script matches table \ref{table:desired-behaviour} exactly, confirming that the simplification process worked
+
+\subsection{Schematic Diagram}
+
+The first step is to draw a schematic diagram of the resulting circuit. The following schematic diagram was drawn and then simulated with multisim:
+
+\begin{figure}[H]
+  \includegraphics[width=17cm]{./images/schematic.png}
+  \caption{Schematic diagram of the "Haunted Doll" circuit}
+  \label{fig:schematic}
+\end{figure}
+
+The resulting circuit consists of three main sections. Each section has some additional features and optimizations.
+
+\subsubsection{Input}
+The input section consists of four switches. Each of the switches corresponds to one of the inputs $S_{1-4}$. In the diagram they are labeled with J1-J4.
+If the input switches are closed the corresponding wire will be at VCC voltage ($5V$). This voltage (also referred to as HIGH) corresponds to an input value
+of 1. A value of 0 is represented by $0V$ (also called GND). Note that the input wires are always connected to GND through a $1k\Omega$ resistor. This connection ensures
+that when the input switches are open that the input wire is at a valid logic value of GND. If there would be no connection in that case the corresponding
+input would have an undefined value, which could lead to undefined behavior. Connecting the input through a $1k\Omega$ resistor ensures that in case the swtich
+is closed the input will be at VCC voltage, as the wire without resistance "overpowers" the connection with resistor. \\
+
+In the schematic additional logic probe indicator lights are attached to the input cables (S1-S4). Their purpose is to quickly and easily
+determine the state of the given input.
+
+\subsubsection{Logic}
+
+The logic section takes in the four input signals and proccesses them. The implemented logic corresponds exactly to the logic filter
+$O$ (equation \ref{eq:logic_filter}). The logic section ends at the X5 logic probe indicator light. This light is there to quickly
+determine the value of $O$ (the logic filter value). The subsequent inverter (label U7A) is not considered
+part of that section. It belongs to the output section and will be explained subsequently.\\
+
+To implement equation \ref{eq:logic_filter} the corresponding 74xx series TTL logic components are used:
+
+\begin{enumerate}
+  \item 7404N Inverter (NOT) 
+  \item 7486N XOR 
+  \item 7408N AND 
+  \item 7432N OR  
+\end{enumerate}
+
+The layout corresponds to the equation 1:1. This can be seen easiest going backwards from the OR gate (label U6A). It's lower
+input corresponds to the left component of equation \ref{eq:logic_filter} and it's upper input to the right component. Consequently the lower
+AND gate (label U4A) has $S_1$ and $\bar{S_4}$ as inputs ($S_4$ gets inverted through inverter U1A). Equally the upper AND gate (label U5A) is
+connected to to $\bar{S_1}$ (inverter U2A) and the exclusive or gate (label U3A) that combines $S_3$ and $S_4$.
+
+\subsubsection{Output}
+
+
+
+
+\subsection{Results}
+
+\section{Conclusion}
+
+
+\printbibliography
+
+\end{document}
